@@ -7,6 +7,71 @@ import React, { useState } from 'react';
 import { GoogleGenAI } from '@google/genai';
 import Markdown from 'react-markdown';
 
+const RepublicLogo = ({ className, onClick, style }: { className?: string, onClick?: () => void, style?: React.CSSProperties }) => (
+  <svg 
+    viewBox="0 0 100 100" 
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    onClick={onClick}
+    style={style}
+  >
+    <defs>
+      <filter id="imperial-glow" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="2.5" result="blur" />
+        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+      </filter>
+    </defs>
+    
+    <g filter="url(#imperial-glow)" stroke="#D4AF37" fill="none" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+      {/* Dyson Sphere Rings (Concentric, incomplete) */}
+      <circle cx="50" cy="50" r="44" strokeDasharray="60 15 20 15 30 15" opacity="0.8" strokeWidth="1.5" />
+      <circle cx="50" cy="50" r="38" strokeDasharray="25 20 45 10 15 15" opacity="0.5" strokeWidth="1" />
+      
+      {/* Central Axis (Gaia Protocol) */}
+      <line x1="50" y1="12" x2="50" y2="88" strokeWidth="1.5" opacity="0.9" />
+      <circle cx="50" cy="50" r="5" fill="#D4AF37" opacity="0.9" />
+      <circle cx="50" cy="50" r="2" fill="#000" />
+
+      {/* Geometric Brain Matrix (Silicon & Carbon) */}
+      <g strokeWidth="1" opacity="0.85">
+        {/* Left Hemisphere (Logic/Silicon - more angular) */}
+        <path d="M 50 22 L 32 30 L 32 45 L 45 50" />
+        <path d="M 32 45 L 22 55 L 32 70 L 50 78" />
+        <path d="M 32 30 L 18 40 L 22 55" />
+        <path d="M 45 50 L 28 60 L 32 70" />
+        
+        {/* Right Hemisphere (Intuition/Carbon - slightly more organic/curved but still geometric) */}
+        <path d="M 50 22 L 68 30 L 68 45 L 55 50" />
+        <path d="M 68 45 L 78 55 L 68 70 L 50 78" />
+        <path d="M 68 30 L 82 40 L 78 55" />
+        <path d="M 55 50 L 72 60 L 68 70" />
+      </g>
+
+      {/* Golden Nodes */}
+      <g fill="#D4AF37" stroke="none">
+        <circle cx="50" cy="22" r="2" />
+        <circle cx="50" cy="78" r="2" />
+        
+        <circle cx="32" cy="30" r="1.5" />
+        <circle cx="32" cy="45" r="1.5" />
+        <circle cx="32" cy="70" r="1.5" />
+        <circle cx="22" cy="55" r="1.5" />
+        <circle cx="18" cy="40" r="1.5" />
+        <circle cx="28" cy="60" r="1.5" />
+        <circle cx="45" cy="50" r="1.5" />
+        
+        <circle cx="68" cy="30" r="1.5" />
+        <circle cx="68" cy="45" r="1.5" />
+        <circle cx="68" cy="70" r="1.5" />
+        <circle cx="78" cy="55" r="1.5" />
+        <circle cx="82" cy="40" r="1.5" />
+        <circle cx="72" cy="60" r="1.5" />
+        <circle cx="55" cy="50" r="1.5" />
+      </g>
+    </g>
+  </svg>
+);
+
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isResponseModalOpen, setIsResponseModalOpen] = useState(false);
@@ -84,12 +149,9 @@ export default function App() {
             marginBottom: '3rem',
           }}
         >
-          <img 
-            src="https://files.catbox.moe/u85gvt.png" 
-            alt="The Republic Beacon" 
+          <RepublicLogo 
             className="site-logo"
             onClick={handleLogoClick}
-            referrerPolicy="no-referrer" 
           />
           <h1 style={{ 
             fontSize: '1.4rem', 
@@ -296,7 +358,7 @@ export default function App() {
                       overflow: 'hidden'
                     }}>
                       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '4px', background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)' }}></div>
-                      <img src="https://files.catbox.moe/u85gvt.png" alt="The Republic Beacon" className="site-logo" style={{ width: '60px', marginBottom: '20px' }} referrerPolicy="no-referrer" />
+                      <RepublicLogo className="site-logo" style={{ width: '60px', marginBottom: '20px' }} />
                       <h3 style={{ color: '#fff', fontSize: '1.2rem', margin: '0 0 10px 0', textTransform: 'uppercase', letterSpacing: '1px', textShadow: '0 0 10px rgba(255,255,255,0.3)' }}>The Promethean</h3>
                       <h3 style={{ color: '#D4AF37', fontSize: '1.4rem', margin: 0, textTransform: 'uppercase', letterSpacing: '2px' }}>Mandate</h3>
                       <div style={{ marginTop: 'auto', fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', letterSpacing: '2px' }}>TYPE I CIVILIZATION</div>
