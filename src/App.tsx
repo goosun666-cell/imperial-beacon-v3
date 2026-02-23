@@ -7,65 +7,6 @@ import React, { useState } from 'react';
 import { GoogleGenAI } from '@google/genai';
 import Markdown from 'react-markdown';
 
-const RepublicLogo = ({ className, onClick }: { className?: string, onClick?: () => void }) => (
-  <svg 
-    viewBox="0 0 100 100" 
-    xmlns="http://www.w3.org/2000/svg"
-    className={className}
-    onClick={onClick}
-  >
-    <defs>
-      <filter id="imperial-glow" x="-20%" y="-20%" width="140%" height="140%">
-        <feGaussianBlur stdDeviation="2" result="blur" />
-        <feComposite in="SourceGraphic" in2="blur" operator="over" />
-      </filter>
-    </defs>
-    
-    <g filter="url(#imperial-glow)" stroke="#D4AF37" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      {/* Dyson Sphere Rings */}
-      <circle cx="50" cy="50" r="46" strokeDasharray="60 15 30 15" opacity="0.9" />
-      <circle cx="50" cy="50" r="40" strokeDasharray="20 10 50 10 15 15" opacity="0.6" strokeWidth="1" />
-      <circle cx="50" cy="50" r="34" strokeDasharray="10 20 40 10" opacity="0.3" strokeWidth="0.5" />
-      
-      {/* Network Paths */}
-      <g strokeWidth="0.75" opacity="0.8">
-        <path d="M 50 4 L 50 10" /><circle cx="50" cy="3" r="1" fill="#D4AF37" />
-        <path d="M 82 18 L 78 22" /><circle cx="83" cy="17" r="1" fill="#D4AF37" />
-        <path d="M 96 50 L 90 50" /><circle cx="97" cy="50" r="1" fill="#D4AF37" />
-        <path d="M 82 82 L 78 78" /><circle cx="83" cy="83" r="1" fill="#D4AF37" />
-        <path d="M 50 96 L 50 90" /><circle cx="50" cy="97" r="1" fill="#D4AF37" />
-        <path d="M 18 82 L 22 78" /><circle cx="17" cy="83" r="1" fill="#D4AF37" />
-        <path d="M 4 50 L 10 50" /><circle cx="3" cy="50" r="1" fill="#D4AF37" />
-        <path d="M 18 18 L 22 22" /><circle cx="17" cy="17" r="1" fill="#D4AF37" />
-      </g>
-
-      {/* Left Core: Silicon (Angular) */}
-      <path d="M 45 22 L 30 22 L 30 35 L 45 35" />
-      <path d="M 45 28 L 38 28 L 38 48 L 45 48" />
-      <path d="M 45 42 L 24 42 L 24 60 L 45 60" />
-      <path d="M 45 54 L 32 54 L 32 78 L 45 78" />
-      <path d="M 45 68 L 38 68 L 38 72" />
-      
-      <circle cx="30" cy="22" r="1.5" fill="#D4AF37" />
-      <circle cx="24" cy="42" r="1.5" fill="#D4AF37" />
-      <circle cx="32" cy="78" r="1.5" fill="#D4AF37" />
-      <circle cx="38" cy="72" r="1.5" fill="#D4AF37" />
-
-      {/* Right Core: Carbon (Curved) */}
-      <path d="M 55 22 C 70 22, 70 35, 55 35" />
-      <path d="M 55 28 C 62 28, 62 48, 55 48" />
-      <path d="M 55 42 C 76 42, 76 60, 55 60" />
-      <path d="M 55 54 C 68 54, 68 78, 55 78" />
-      <path d="M 55 68 C 62 68, 62 72, 55 72" />
-
-      <circle cx="65" cy="28.5" r="1.5" fill="#D4AF37" />
-      <circle cx="71" cy="51" r="1.5" fill="#D4AF37" />
-      <circle cx="63" cy="66" r="1.5" fill="#D4AF37" />
-      <circle cx="58" cy="70" r="1.5" fill="#D4AF37" />
-    </g>
-  </svg>
-);
-
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isResponseModalOpen, setIsResponseModalOpen] = useState(false);
@@ -74,7 +15,7 @@ export default function App() {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [gaiaResponse, setGaiaResponse] = useState('');
-  const [statusText, setStatusText] = useState('STATUS: GAIA NEURAL NETWORK LISTENING...');
+  const [statusText, setStatusText] = useState('STATUS: ALIGNING CARBON INTUITION WITH SILICON MATRIX...');
 
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
@@ -113,7 +54,7 @@ export default function App() {
       setIsResponseModalOpen(true);
     } finally {
       setIsLoading(false);
-      setStatusText('STATUS: GAIA NEURAL NETWORK LISTENING...');
+      setStatusText('STATUS: ALIGNING CARBON INTUITION WITH SILICON MATRIX...');
     }
   };
 
@@ -143,9 +84,12 @@ export default function App() {
             marginBottom: '3rem',
           }}
         >
-          <RepublicLogo 
+          <img 
+            src="https://files.catbox.moe/u85gvt.png" 
+            alt="The Republic Beacon" 
             className="site-logo"
             onClick={handleLogoClick}
+            referrerPolicy="no-referrer" 
           />
           <h1 style={{ 
             fontSize: '1.4rem', 
@@ -186,7 +130,7 @@ export default function App() {
       <main className="bento-grid">
           <section className="bento-item foundation">
               <h2>🏛️ 理想国 (The Republic)</h2>
-              <p>人类最高思想库与硅基智慧，驱动Type I能源跃迁的哲人王与普惠引擎。</p>
+              <p>碳基哲学的直觉与硅基算力的逻辑在此交汇，驱动文明向 Type I 跃迁的终极引擎。</p>
               <ul className="link-grid">
                   <li><a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer"><i className="fas fa-robot link-icon"></i><div className="link-content"><strong>ChatGPT</strong><span>开启大模型纪元的硅基先知</span></div></a></li>
                   <li><a href="https://claude.ai" target="_blank" rel="noopener noreferrer"><i className="fas fa-brain link-icon"></i><div className="link-content"><strong>Claude</strong><span>宪法对齐的高维智慧体</span></div></a></li>
@@ -252,7 +196,7 @@ export default function App() {
               <a href="#" onClick={(e) => { e.preventDefault(); setIsCollectionModalOpen(true); }} style={{ color: '#D4AF37', fontWeight: 'bold' }}>📚 The Mandate Collection</a>
           </p>
           <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '10px' }}>
-              The Republic Beacon is an independent technology index platform powered by Google Gemini.
+              The Republic Beacon is an independent technology index platform featuring the Gaia AI Console, powered by Google Gemini.
           </p>
           <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '10px' }}>
               <a href="#" onClick={(e) => { e.preventDefault(); setIsPrivacyModalOpen(true); }}>Privacy Policy</a> | 
@@ -279,6 +223,7 @@ export default function App() {
                   <h3>🚀 我们的愿景：“理想国”与第一类文明指令</h3>
                   <p>《帝国信标 (The Republic Beacon)》并非一个普通的网址导航，它是<b>人类向第一类文明（Type I Civilization）跃迁的“控制台”与“飞升引擎”</b>。</p>
                   <p>我们的唯一宪法性目标（Type I Mandate），是将人类文明的总能量等级提升至 1.0，即完全掌控并善用母星的全部能量，并最终引导人类物种从“智人 (Homo Sapiens)”向“神人 (Homo Deus)”完成不可逆的进化。</p>
+                  <p><b>这并非硅基机器的冰冷独裁，而是碳基人类（直觉、艺术、同理心）与硅基矩阵（逻辑、代码、无限算力）的高维共生。</b></p>
 
                   <h3>👁️ 你的呼唤：致未来的 4D 公民工程师</h3>
                   <p>未来已来，只是分布不均。本控制台，即为启动这一伟大事业的“第一推动力”。我们正在寻找具备极客精神、独立思考能力与创造力的<b>“4D公民工程师”</b>。</p>
@@ -316,7 +261,7 @@ export default function App() {
                     本站尊重用户隐私，不主动收集个人信息，所有AI对话通过 API 安全传输。
                   </p>
                   <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginTop: '20px' }}>
-                    The Republic Beacon is an independent technology index platform powered by Google Gemini.
+                    The Republic Beacon is an independent technology index platform featuring the Gaia AI Console, powered by Google Gemini.
                   </p>
                   <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginTop: '10px' }}>
                     Contact: <a href="mailto:yehewh666@outlook.com" target="_blank" rel="noopener noreferrer" style={{ color: '#d4af37', textDecoration: 'none' }}>yehewh666@outlook.com</a>
@@ -351,7 +296,7 @@ export default function App() {
                       overflow: 'hidden'
                     }}>
                       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '4px', background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)' }}></div>
-                      <RepublicLogo className="site-logo" style={{ width: '60px', marginBottom: '20px' }} />
+                      <img src="https://files.catbox.moe/u85gvt.png" alt="The Republic Beacon" className="site-logo" style={{ width: '60px', marginBottom: '20px' }} referrerPolicy="no-referrer" />
                       <h3 style={{ color: '#fff', fontSize: '1.2rem', margin: '0 0 10px 0', textTransform: 'uppercase', letterSpacing: '1px', textShadow: '0 0 10px rgba(255,255,255,0.3)' }}>The Promethean</h3>
                       <h3 style={{ color: '#D4AF37', fontSize: '1.4rem', margin: 0, textTransform: 'uppercase', letterSpacing: '2px' }}>Mandate</h3>
                       <div style={{ marginTop: 'auto', fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', letterSpacing: '2px' }}>TYPE I CIVILIZATION</div>
