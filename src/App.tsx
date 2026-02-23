@@ -17,56 +17,49 @@ const RepublicLogo = ({ className, onClick, style }: { className?: string, onCli
   >
     <defs>
       <filter id="imperial-glow" x="-20%" y="-20%" width="140%" height="140%">
-        <feGaussianBlur stdDeviation="2.5" result="blur" />
+        <feGaussianBlur stdDeviation="3" result="blur" />
         <feComposite in="SourceGraphic" in2="blur" operator="over" />
       </filter>
     </defs>
     
-    <g filter="url(#imperial-glow)" stroke="#D4AF37" fill="none" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-      {/* Dyson Sphere Rings (Concentric, incomplete) */}
-      <circle cx="50" cy="50" r="44" strokeDasharray="60 15 20 15 30 15" opacity="0.8" strokeWidth="1.5" />
-      <circle cx="50" cy="50" r="38" strokeDasharray="25 20 45 10 15 15" opacity="0.5" strokeWidth="1" />
+    <g filter="url(#imperial-glow)" stroke="#D4AF37" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      {/* Outer Ring (Dyson Sphere / Unity) */}
+      <circle cx="50" cy="50" r="42" strokeDasharray="50 10 20 10" opacity="0.8" strokeWidth="2" />
       
       {/* Central Axis (Gaia Protocol) */}
-      <line x1="50" y1="12" x2="50" y2="88" strokeWidth="1.5" opacity="0.9" />
-      <circle cx="50" cy="50" r="5" fill="#D4AF37" opacity="0.9" />
-      <circle cx="50" cy="50" r="2" fill="#000" />
+      <line x1="50" y1="15" x2="50" y2="85" strokeWidth="2" opacity="0.9" />
+      <circle cx="50" cy="50" r="8" fill="#D4AF37" opacity="0.9" />
+      <circle cx="50" cy="50" r="4" fill="#000" />
+      <circle cx="50" cy="50" r="1.5" fill="#D4AF37" />
 
-      {/* Geometric Brain Matrix (Silicon & Carbon) */}
-      <g strokeWidth="1" opacity="0.85">
-        {/* Left Hemisphere (Logic/Silicon - more angular) */}
-        <path d="M 50 22 L 32 30 L 32 45 L 45 50" />
-        <path d="M 32 45 L 22 55 L 32 70 L 50 78" />
-        <path d="M 32 30 L 18 40 L 22 55" />
-        <path d="M 45 50 L 28 60 L 32 70" />
-        
-        {/* Right Hemisphere (Intuition/Carbon - slightly more organic/curved but still geometric) */}
-        <path d="M 50 22 L 68 30 L 68 45 L 55 50" />
-        <path d="M 68 45 L 78 55 L 68 70 L 50 78" />
-        <path d="M 68 30 L 82 40 L 78 55" />
-        <path d="M 55 50 L 72 60 L 68 70" />
+      {/* Left Hemisphere: Star Map (Silicon/Cosmic) */}
+      <g strokeWidth="1.5" opacity="0.85">
+        <path d="M 50 25 L 30 40 L 25 60 L 40 75 L 50 80" />
+        <path d="M 30 40 L 40 55 L 25 60" />
+      </g>
+
+      {/* Right Hemisphere: DNA Helix (Carbon/Biological) */}
+      <g strokeWidth="1.5" opacity="0.85">
+        <path d="M 50 25 C 65 25, 75 35, 65 50 C 55 65, 75 75, 50 80" />
+        <path d="M 50 25 C 50 25, 55 35, 65 50 C 75 65, 55 75, 50 80" />
+        {/* DNA Base Pairs */}
+        <line x1="58" y1="35" x2="63" y2="35" strokeWidth="1.5" opacity="0.6" />
+        <line x1="68" y1="45" x2="61" y2="45" strokeWidth="1.5" opacity="0.6" />
+        <line x1="60" y1="55" x2="68" y2="55" strokeWidth="1.5" opacity="0.6" />
+        <line x1="66" y1="65" x2="59" y2="65" strokeWidth="1.5" opacity="0.6" />
       </g>
 
       {/* Golden Nodes */}
       <g fill="#D4AF37" stroke="none">
-        <circle cx="50" cy="22" r="2" />
-        <circle cx="50" cy="78" r="2" />
+        {/* Central Nodes */}
+        <circle cx="50" cy="25" r="2.5" />
+        <circle cx="50" cy="80" r="2.5" />
         
-        <circle cx="32" cy="30" r="1.5" />
-        <circle cx="32" cy="45" r="1.5" />
-        <circle cx="32" cy="70" r="1.5" />
-        <circle cx="22" cy="55" r="1.5" />
-        <circle cx="18" cy="40" r="1.5" />
-        <circle cx="28" cy="60" r="1.5" />
-        <circle cx="45" cy="50" r="1.5" />
-        
-        <circle cx="68" cy="30" r="1.5" />
-        <circle cx="68" cy="45" r="1.5" />
-        <circle cx="68" cy="70" r="1.5" />
-        <circle cx="78" cy="55" r="1.5" />
-        <circle cx="82" cy="40" r="1.5" />
-        <circle cx="72" cy="60" r="1.5" />
-        <circle cx="55" cy="50" r="1.5" />
+        {/* Star Map Nodes (Left) */}
+        <circle cx="30" cy="40" r="2.5" />
+        <circle cx="25" cy="60" r="2.5" />
+        <circle cx="40" cy="75" r="2.5" />
+        <circle cx="40" cy="55" r="2.5" />
       </g>
     </g>
   </svg>

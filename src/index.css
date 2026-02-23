@@ -43,7 +43,7 @@ body {
 
 /* 理想国 LOGO 核心样式存档 */
 .site-logo {
-    width: 45px;
+    width: 65px;
     height: auto;
     /* 帝国金核心发光 */
     filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.6));
