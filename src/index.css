@@ -29,17 +29,32 @@ body {
     width: 100%;
 }
 
+/* 模拟盖亚思考的呼吸动画 */
+@keyframes logo-breathing {
+    0%, 100% {
+        filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.3));
+        transform: scale(1);
+    }
+    50% {
+        filter: drop-shadow(0 0 18px rgba(212, 175, 55, 0.8));
+        transform: scale(1.03);
+    }
+}
+
+/* 理想国 LOGO 核心样式存档 */
 .site-logo {
     width: 45px;
     height: auto;
-    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
-    transition: all 0.4s ease;
+    /* 帝国金核心发光 */
+    filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.6));
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: logo-breathing 4s ease-in-out infinite;
     cursor: pointer;
 }
 
 .site-logo:hover {
     transform: scale(1.1);
-    filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.8));
+    filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.9));
 }
 
 /* ===================================
@@ -129,6 +144,33 @@ body {
     25% { transform: scale(1.2) rotate(-5deg); opacity: 1; text-shadow: 0 0 40px rgba(212, 175, 55, 1); }
     50% { transform: scale(1.1) rotate(5deg); opacity: 0.9; text-shadow: 0 0 30px rgba(212, 175, 55, 0.9); }
     75% { transform: scale(1.3) rotate(-3deg); opacity: 1; text-shadow: 0 0 50px rgba(212, 175, 55, 1); }
+}
+
+@keyframes amazon-breathe {
+    0%, 100% { box-shadow: 0 0 10px rgba(255, 153, 0, 0.4); border-color: rgba(255, 153, 0, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(255, 153, 0, 0.8); border-color: rgba(255, 153, 0, 1); }
+}
+
+.amazon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: rgba(255, 153, 0, 0.1);
+    border: 1px solid rgba(255, 153, 0, 0.5);
+    color: #FF9900;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    animation: amazon-breathe 3s infinite;
+}
+
+.amazon-btn:hover {
+    background: rgba(255, 153, 0, 0.2);
+    transform: translateY(-2px);
+    color: #FF9900;
 }
 
 .gaia-icon.overload {

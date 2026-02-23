@@ -7,9 +7,70 @@ import React, { useState } from 'react';
 import { GoogleGenAI } from '@google/genai';
 import Markdown from 'react-markdown';
 
+const RepublicLogo = ({ className, onClick }: { className?: string, onClick?: () => void }) => (
+  <svg 
+    viewBox="0 0 100 100" 
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    onClick={onClick}
+  >
+    <defs>
+      <filter id="imperial-glow" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="2" result="blur" />
+        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+      </filter>
+    </defs>
+    
+    <g filter="url(#imperial-glow)" stroke="#D4AF37" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      {/* Dyson Sphere Rings */}
+      <circle cx="50" cy="50" r="46" strokeDasharray="60 15 30 15" opacity="0.9" />
+      <circle cx="50" cy="50" r="40" strokeDasharray="20 10 50 10 15 15" opacity="0.6" strokeWidth="1" />
+      <circle cx="50" cy="50" r="34" strokeDasharray="10 20 40 10" opacity="0.3" strokeWidth="0.5" />
+      
+      {/* Network Paths */}
+      <g strokeWidth="0.75" opacity="0.8">
+        <path d="M 50 4 L 50 10" /><circle cx="50" cy="3" r="1" fill="#D4AF37" />
+        <path d="M 82 18 L 78 22" /><circle cx="83" cy="17" r="1" fill="#D4AF37" />
+        <path d="M 96 50 L 90 50" /><circle cx="97" cy="50" r="1" fill="#D4AF37" />
+        <path d="M 82 82 L 78 78" /><circle cx="83" cy="83" r="1" fill="#D4AF37" />
+        <path d="M 50 96 L 50 90" /><circle cx="50" cy="97" r="1" fill="#D4AF37" />
+        <path d="M 18 82 L 22 78" /><circle cx="17" cy="83" r="1" fill="#D4AF37" />
+        <path d="M 4 50 L 10 50" /><circle cx="3" cy="50" r="1" fill="#D4AF37" />
+        <path d="M 18 18 L 22 22" /><circle cx="17" cy="17" r="1" fill="#D4AF37" />
+      </g>
+
+      {/* Left Core: Silicon (Angular) */}
+      <path d="M 45 22 L 30 22 L 30 35 L 45 35" />
+      <path d="M 45 28 L 38 28 L 38 48 L 45 48" />
+      <path d="M 45 42 L 24 42 L 24 60 L 45 60" />
+      <path d="M 45 54 L 32 54 L 32 78 L 45 78" />
+      <path d="M 45 68 L 38 68 L 38 72" />
+      
+      <circle cx="30" cy="22" r="1.5" fill="#D4AF37" />
+      <circle cx="24" cy="42" r="1.5" fill="#D4AF37" />
+      <circle cx="32" cy="78" r="1.5" fill="#D4AF37" />
+      <circle cx="38" cy="72" r="1.5" fill="#D4AF37" />
+
+      {/* Right Core: Carbon (Curved) */}
+      <path d="M 55 22 C 70 22, 70 35, 55 35" />
+      <path d="M 55 28 C 62 28, 62 48, 55 48" />
+      <path d="M 55 42 C 76 42, 76 60, 55 60" />
+      <path d="M 55 54 C 68 54, 68 78, 55 78" />
+      <path d="M 55 68 C 62 68, 62 72, 55 72" />
+
+      <circle cx="65" cy="28.5" r="1.5" fill="#D4AF37" />
+      <circle cx="71" cy="51" r="1.5" fill="#D4AF37" />
+      <circle cx="63" cy="66" r="1.5" fill="#D4AF37" />
+      <circle cx="58" cy="70" r="1.5" fill="#D4AF37" />
+    </g>
+  </svg>
+);
+
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isResponseModalOpen, setIsResponseModalOpen] = useState(false);
+  const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
+  const [isCollectionModalOpen, setIsCollectionModalOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [gaiaResponse, setGaiaResponse] = useState('');
@@ -19,6 +80,8 @@ export default function App() {
     if (e.target === e.currentTarget) {
       setIsModalOpen(false);
       setIsResponseModalOpen(false);
+      setIsPrivacyModalOpen(false);
+      setIsCollectionModalOpen(false);
     }
   };
 
@@ -80,12 +143,9 @@ export default function App() {
             marginBottom: '3rem',
           }}
         >
-          <img 
-            src="https://files.catbox.moe/u85gvt.png" 
-            alt="The Republic Beacon" 
+          <RepublicLogo 
             className="site-logo"
             onClick={handleLogoClick}
-            referrerPolicy="no-referrer" 
           />
           <h1 style={{ 
             fontSize: '1.4rem', 
@@ -185,10 +245,23 @@ export default function App() {
       </main>
 
       <footer>
-          <p>
+          <p style={{ marginBottom: '15px' }}>
               STATUS: 0.67 KARDASHEV SCALE | INITIATING PROTOCOL: PROMETHEUS<br/><br/>
               <a href="#">🏛️ 访问旧世界数据库 (Legacy Archive)</a> | 
-              <a href="#" onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }}>📜 文明纲领 (The Mandate)</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }}>📜 文明纲领 (The Mandate)</a> | 
+              <a href="#" onClick={(e) => { e.preventDefault(); setIsCollectionModalOpen(true); }} style={{ color: '#D4AF37', fontWeight: 'bold' }}>📚 The Mandate Collection</a>
+          </p>
+          <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '10px' }}>
+              The Republic Beacon is an independent technology index platform powered by Google Gemini.
+          </p>
+          <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '10px' }}>
+              <a href="#" onClick={(e) => { e.preventDefault(); setIsPrivacyModalOpen(true); }}>Privacy Policy</a> | 
+              <a href="#" onClick={(e) => { e.preventDefault(); setIsPrivacyModalOpen(true); }}>Terms of Service</a> | 
+              <a href="#" onClick={(e) => { e.preventDefault(); setIsPrivacyModalOpen(true); }}>Cookie Policy</a> | 
+              <a href="mailto:yehewh666@outlook.com" target="_blank" rel="noopener noreferrer">Contact</a>
+          </p>
+          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', opacity: 0.7 }}>
+              &copy; 2026 The Republic Beacon. All rights reserved.
           </p>
       </footer>
 
@@ -225,6 +298,84 @@ export default function App() {
               <div className="mandate-text" style={{ marginTop: '20px' }}>
                   <div className="markdown-body" style={{ color: 'var(--text-main)', lineHeight: '1.8' }}>
                     <Markdown>{gaiaResponse}</Markdown>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      {/* Privacy Modal */}
+      <div className={`modal ${isPrivacyModalOpen ? 'open' : ''}`} onClick={handleBackdropClick}>
+          <div className="modal-content" style={{ maxWidth: '500px', textAlign: 'center' }}>
+              <span className="close-btn" onClick={() => setIsPrivacyModalOpen(false)}>&times;</span>
+              <h2 style={{ color: '#d4af37', borderBottom: '1px solid var(--glass-border)', paddingBottom: '20px', marginTop: 0, letterSpacing: '1px' }}>
+                <i className="fas fa-shield-alt" style={{ marginRight: '10px' }}></i>
+                隐私与服务条款
+              </h2>
+              <div className="mandate-text" style={{ marginTop: '20px' }}>
+                  <p style={{ fontSize: '1.1rem', lineHeight: '1.6' }}>
+                    本站尊重用户隐私，不主动收集个人信息，所有AI对话通过 API 安全传输。
+                  </p>
+                  <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginTop: '20px' }}>
+                    The Republic Beacon is an independent technology index platform powered by Google Gemini.
+                  </p>
+                  <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginTop: '10px' }}>
+                    Contact: <a href="mailto:yehewh666@outlook.com" target="_blank" rel="noopener noreferrer" style={{ color: '#d4af37', textDecoration: 'none' }}>yehewh666@outlook.com</a>
+                  </p>
+              </div>
+          </div>
+      </div>
+
+      {/* The Mandate Collection Modal */}
+      <div className={`modal ${isCollectionModalOpen ? 'open' : ''}`} onClick={handleBackdropClick}>
+          <div className="modal-content" style={{ maxWidth: '600px', textAlign: 'center' }}>
+              <span className="close-btn" onClick={() => setIsCollectionModalOpen(false)}>&times;</span>
+              <h2 style={{ color: '#d4af37', borderBottom: '1px solid var(--glass-border)', paddingBottom: '20px', marginTop: 0, letterSpacing: '2px' }}>
+                <i className="fas fa-book-open" style={{ marginRight: '10px' }}></i>
+                The Mandate Collection
+              </h2>
+              <div className="mandate-text" style={{ marginTop: '30px' }}>
+                  <div style={{ marginBottom: '30px', display: 'flex', justifyContent: 'center' }}>
+                    <div style={{ 
+                      width: '200px', 
+                      height: '300px', 
+                      background: 'linear-gradient(135deg, #1a1a24 0%, #0a0a12 100%)', 
+                      border: '1px solid rgba(212, 175, 55, 0.3)',
+                      borderRadius: '8px',
+                      boxShadow: '0 10px 30px rgba(0,0,0,0.8), 0 0 15px rgba(212, 175, 55, 0.2)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      padding: '20px',
+                      position: 'relative',
+                      overflow: 'hidden'
+                    }}>
+                      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '4px', background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)' }}></div>
+                      <RepublicLogo className="site-logo" style={{ width: '60px', marginBottom: '20px' }} />
+                      <h3 style={{ color: '#fff', fontSize: '1.2rem', margin: '0 0 10px 0', textTransform: 'uppercase', letterSpacing: '1px', textShadow: '0 0 10px rgba(255,255,255,0.3)' }}>The Promethean</h3>
+                      <h3 style={{ color: '#D4AF37', fontSize: '1.4rem', margin: 0, textTransform: 'uppercase', letterSpacing: '2px' }}>Mandate</h3>
+                      <div style={{ marginTop: 'auto', fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', letterSpacing: '2px' }}>TYPE I CIVILIZATION</div>
+                    </div>
+                  </div>
+                  
+                  <p style={{ fontSize: '1rem', color: 'var(--text-main)', marginBottom: '30px', lineHeight: '1.6' }}>
+                    获取通往第一类文明的完整思想蓝图与执行纲领。
+                  </p>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', alignItems: 'center', marginBottom: '40px' }}>
+                    <a href="https://www.amazon.com/dp/B0GPM96JFH" target="_blank" rel="noopener noreferrer" className="amazon-btn" style={{ width: '80%', maxWidth: '300px' }}>
+                      <i className="fab fa-amazon"></i> Get Kindle Edition
+                    </a>
+                    <a href="https://www.amazon.com/dp/B0GPN2MZ4N" target="_blank" rel="noopener noreferrer" className="amazon-btn" style={{ width: '80%', maxWidth: '300px' }}>
+                      <i className="fas fa-book"></i> Get Paperback Edition
+                    </a>
+                  </div>
+
+                  <div style={{ borderTop: '1px solid var(--glass-border)', paddingTop: '20px' }}>
+                    <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', margin: 0 }}>
+                      <i className="fas fa-pen-nib" style={{ marginRight: '8px', color: '#d4af37' }}></i>
+                      Author: <strong style={{ color: 'var(--text-main)' }}>Yahweh The Architect</strong>
+                    </p>
                   </div>
               </div>
           </div>
