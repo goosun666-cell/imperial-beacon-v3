@@ -62,9 +62,9 @@ export default function App() {
 
   const handleLogoClick = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    setInputValue('');
-    setGaiaResponse('');
-    setStatusText('STATUS: GAIA NEURAL NETWORK LISTENING...');
+    setTimeout(() => {
+      window.location.reload();
+    }, 400);
   };
 
   return (
@@ -72,27 +72,19 @@ export default function App() {
       <header className="console-header" style={{ position: 'relative', width: '100%', maxWidth: '1600px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <div 
           className="logo-title-group" 
-          onClick={handleLogoClick}
           style={{ 
             alignSelf: 'flex-start',
             display: 'flex', 
             alignItems: 'center', 
             gap: '15px', 
             marginBottom: '3rem',
-            cursor: 'pointer',
-            transition: 'transform 0.3s ease'
           }}
-          onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
-          onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
         >
           <img 
             src="https://files.catbox.moe/u85gvt.png" 
             alt="The Republic Beacon" 
-            style={{ 
-              width: '45px', 
-              height: 'auto', 
-              filter: 'drop-shadow(0 0 12px rgba(212, 175, 55, 0.6))' 
-            }} 
+            className="site-logo"
+            onClick={handleLogoClick}
             referrerPolicy="no-referrer" 
           />
           <h1 style={{ 
