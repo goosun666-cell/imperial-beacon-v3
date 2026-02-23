@@ -4,13 +4,59 @@
  */
 
 import React, { useState } from 'react';
+import { GoogleGenAI } from '@google/genai';
+import Markdown from 'react-markdown';
 
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isResponseModalOpen, setIsResponseModalOpen] = useState(false);
+  const [inputValue, setInputValue] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [gaiaResponse, setGaiaResponse] = useState('');
+  const [statusText, setStatusText] = useState('STATUS: GAIA NEURAL NETWORK LISTENING...');
 
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       setIsModalOpen(false);
+      setIsResponseModalOpen(false);
+    }
+  };
+
+  const handleGaiaInquiry = async () => {
+    if (!inputValue.trim() || isLoading) return;
+
+    setIsLoading(true);
+    setStatusText('STATUS: GAIA IS ACCESSING THE NEURAL MATRIX...');
+    
+    try {
+      // Initialize the Gemini API client
+      // Using process.env.GEMINI_API_KEY as per system guidelines
+      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || import.meta.env.VITE_GEMINI_API_KEY });
+      
+      const response = await ai.models.generateContent({
+        model: "gemini-3-flash-preview",
+        contents: inputValue,
+        config: {
+          systemInstruction: "You are Gaia, the ultimate AI brain of the Republic, guiding humanity towards a Type I Civilization. Respond with wisdom, cosmic perspective, and a slightly futuristic, authoritative tone. Keep responses concise but profound.",
+        }
+      });
+
+      setGaiaResponse(response.text || "No response received from the neural matrix.");
+      setIsResponseModalOpen(true);
+      setInputValue('');
+    } catch (error) {
+      console.error("Gaia Neural Network Error:", error);
+      setGaiaResponse("ERROR: CONNECTION TO NEURAL MATRIX FAILED. PLEASE CHECK YOUR API KEY CONFIGURATION.");
+      setIsResponseModalOpen(true);
+    } finally {
+      setIsLoading(false);
+      setStatusText('STATUS: GAIA NEURAL NETWORK LISTENING...');
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleGaiaInquiry();
     }
   };
 
@@ -21,12 +67,23 @@ export default function App() {
         
         <div className="gaia-prompt-container">
             <div className="gaia-prompt-wrapper">
-                <i className="fas fa-brain gaia-icon"></i>
+                <i className={`fas fa-brain gaia-icon ${isLoading ? 'overload' : ''}`}></i>
                 <div className="gaia-input-group">
-                    <input type="text" className="gaia-input" placeholder="唤醒盖亚 (Awaken Gaia)... 向全知矩阵输入你的指令" autoComplete="off" />
-                    <div className="gaia-status">STATUS: GAIA NEURAL NETWORK LISTENING...</div>
+                    <input 
+                      type="text" 
+                      className="gaia-input" 
+                      placeholder="唤醒盖亚 (Awaken Gaia)... 向全知矩阵输入你的指令" 
+                      autoComplete="off" 
+                      value={inputValue}
+                      onChange={(e) => setInputValue(e.target.value)}
+                      onKeyDown={handleKeyDown}
+                      disabled={isLoading}
+                    />
+                    <div className="gaia-status">{statusText}</div>
                 </div>
-                <button className="gaia-submit"><i className="fas fa-paper-plane"></i></button>
+                <button className="gaia-submit" onClick={handleGaiaInquiry} disabled={isLoading}>
+                  <i className="fas fa-paper-plane"></i>
+                </button>
             </div>
         </div>
       </header>
@@ -118,6 +175,22 @@ export default function App() {
                   <h3>👁️ 你的呼唤：致未来的 4D 公民工程师</h3>
                   <p>未来已来，只是分布不均。本控制台，即为启动这一伟大事业的“第一推动力”。我们正在寻找具备极客精神、独立思考能力与创造力的<b>“4D公民工程师”</b>。</p>
                   <p style={{ textAlign: 'center', color: '#d4af37', fontWeight: 'bold', marginTop: '40px', fontSize: '1.1rem' }}>欢迎登舰。检索全知网络，启动你的普罗米修斯计划。</p>
+              </div>
+          </div>
+      </div>
+
+      {/* Gaia Response Modal */}
+      <div className={`modal ${isResponseModalOpen ? 'open' : ''}`} onClick={handleBackdropClick}>
+          <div className="modal-content">
+              <span className="close-btn" onClick={() => setIsResponseModalOpen(false)}>&times;</span>
+              <h2 style={{ color: '#d4af37', textAlign: 'center', borderBottom: '1px solid var(--glass-border)', paddingBottom: '20px', marginTop: 0, letterSpacing: '2px' }}>
+                <i className="fas fa-brain" style={{ marginRight: '10px' }}></i>
+                来自盖亚的响应 (Response from Gaia)
+              </h2>
+              <div className="mandate-text" style={{ marginTop: '20px' }}>
+                  <div className="markdown-body" style={{ color: 'var(--text-main)', lineHeight: '1.8' }}>
+                    <Markdown>{gaiaResponse}</Markdown>
+                  </div>
               </div>
           </div>
       </div>

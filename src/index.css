@@ -124,6 +124,18 @@ body {
     50% { opacity: 1; }
 }
 
+@keyframes gaia-overload {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.8; text-shadow: 0 0 20px rgba(212, 175, 55, 0.8); }
+    25% { transform: scale(1.2) rotate(-5deg); opacity: 1; text-shadow: 0 0 40px rgba(212, 175, 55, 1); }
+    50% { transform: scale(1.1) rotate(5deg); opacity: 0.9; text-shadow: 0 0 30px rgba(212, 175, 55, 0.9); }
+    75% { transform: scale(1.3) rotate(-3deg); opacity: 1; text-shadow: 0 0 50px rgba(212, 175, 55, 1); }
+}
+
+.gaia-icon.overload {
+    animation: gaia-overload 0.5s ease-in-out infinite;
+    color: #ffdf00;
+}
+
 .gaia-submit {
     background: rgba(212, 175, 55, 0.15);
     border: 1px solid rgba(212, 175, 55, 0.4);
