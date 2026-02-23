@@ -246,7 +246,7 @@ export default function App() {
       <footer>
           <p style={{ marginBottom: '15px' }}>
               STATUS: 0.67 KARDASHEV SCALE | INITIATING PROTOCOL: PROMETHEUS<br/><br/>
-              <a href="#">🏛️ 访问旧世界数据库 (Legacy Archive)</a> | 
+              <a href="/archive.html">🏛️ 访问旧世界数据库 (Legacy Archive)</a> | 
               <a href="#" onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }}>📜 文明纲领 (The Mandate)</a> | 
               <a href="#" onClick={(e) => { e.preventDefault(); setIsCollectionModalOpen(true); }} style={{ color: '#D4AF37', fontWeight: 'bold' }}>📚 The Mandate Collection</a>
           </p>
