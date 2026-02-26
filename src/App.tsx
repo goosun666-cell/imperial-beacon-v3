@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import { GoogleGenAI } from '@google/genai';
 import Markdown from 'react-markdown';
 
+// GAIA Node Matrix Synced
 const RepublicLogo = ({ className, onClick, style }: { className?: string, onClick?: () => void, style?: React.CSSProperties }) => (
   <svg 
     viewBox="0 0 100 100" 
@@ -207,6 +208,7 @@ export default function App() {
               <h2>🌐 去中心化 (Decentralization)</h2>
               <p>理想国的前沿社会实验场，基于代码法治的数字宪法与高维模拟矩阵。</p>
               <ul className="link-grid">
+                  <li><a href="https://nodes.7861618.xyz/" target="_blank" rel="noopener noreferrer"><i className="fas fa-cubes link-icon"></i><div className="link-content"><strong>GOSUN GAIA 节点矩阵</strong><span>第一类文明跨维网关，GAIA 神谕审计的加密财富节点中枢。</span></div></a></li>
                   <li><a href="https://ethereum.org" target="_blank" rel="noopener noreferrer"><i className="fab fa-ethereum link-icon"></i><div className="link-content"><strong>Ethereum</strong><span>去中心化社会的智能合约基石</span></div></a></li>
                   <li><a href="https://bittensor.com" target="_blank" rel="noopener noreferrer"><i className="fas fa-project-diagram link-icon"></i><div className="link-content"><strong>Bittensor (TAO)</strong><span>去中心化 AI 算力与神经网络模拟</span></div></a></li>
                   <li><a href="https://ens.domains" target="_blank" rel="noopener noreferrer"><i className="fas fa-id-card link-icon"></i><div className="link-content"><strong>ENS</strong><span>自我主权的 Web3 数字护照基座</span></div></a></li>
